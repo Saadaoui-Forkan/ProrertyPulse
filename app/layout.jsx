@@ -5,6 +5,9 @@ export const metadata = {
     title: 'Property Pulse',
     description: 'Find your dream rental property',
     keywords: 'rental, find rentals, property, find properties',
+    icons: {
+    icon: '/icon.png', 
+  },
 }
 
 const MainLayout = ({ children }) => {
