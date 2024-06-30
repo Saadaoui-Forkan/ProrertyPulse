@@ -48,11 +48,11 @@ const Navbar = () => {
           <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-start">
             {/* <!-- Logo --> */}
             <Link className="flex flex-shrink-0 items-center" href="/">
-              <span className="hidden md:block text-white text-2xl font-bold ml-2">
+              <span className="hidden md:block text-white text-lg font-bold ml-2">
                 Property
               </span>
-              <Image className="h-10 w-auto" src={logo} alt="PropertyPulse" />
-              <span className="hidden md:block text-white text-2xl font-bold">
+              <Image className="h-8 w-auto" src={logo} alt="PropertyPulse" />
+              <span className="hidden md:block text-white text-lg font-bold">
                 Pulse
               </span>
             </Link>
