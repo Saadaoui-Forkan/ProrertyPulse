@@ -1,37 +1,35 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { FaArrowLeft } from 'react-icons/fa';
+import { FaArrowLeft } from "react-icons/fa";
 import { fetchProperty } from "@/utils/requests";
 
 const PropertyPage = () => {
-  const [property, setProperty] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [property, setProperty] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const { id } = useParams()
+  const { id } = useParams();
 
   useEffect(() => {
-    const fetchPropertyData = async() => {
-
-      if (!id) return
+    const fetchPropertyData = async () => {
+      if (!id) return;
       try {
-        const property = await fetchProperty(id)
-        setProperty(property)
+        const property = await fetchProperty(id);
+        console.log("property");
+        setProperty(property);
       } catch (error) {
-        console.error('Error fetching property: ', error)
+        console.error("Error fetching property: ", error);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
+    };
 
-      
-        fetchPropertyData()
-      
+    if (property === null) {
+      fetchPropertyData();
     }
-  }, [id])
+  }, [id, property]);
 
-  if (loading) return <h1>Loading...</h1>
-  if (!property) return <h1> No Property Found </h1>
   return (
     <>
       {/* <PropertyHeaderImage image={property.images[0]} /> */}
