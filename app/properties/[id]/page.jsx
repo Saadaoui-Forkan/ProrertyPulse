@@ -1,12 +1,37 @@
 "use client"
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { FaArrowLeft } from 'react-icons/fa';
+import { fetchProperty } from "@/utils/requests";
 
 const PropertyPage = () => {
+  const [property, setProperty] = useState(null)
+  const [loading, setLoading] = useState(true)
+
   const { id } = useParams()
-  console.log(id)
+
+  useEffect(() => {
+    const fetchPropertyData = async() => {
+
+      if (!id) return
+      try {
+        const property = await fetchProperty(id)
+        setProperty(property)
+      } catch (error) {
+        console.error('Error fetching property: ', error)
+      } finally {
+        setLoading(false)
+      }
+
+      
+        fetchPropertyData()
+      
+    }
+  }, [id])
+
+  if (loading) return <h1>Loading...</h1>
+  if (!property) return <h1> No Property Found </h1>
   return (
     <>
       {/* <PropertyHeaderImage image={property.images[0]} /> */}
