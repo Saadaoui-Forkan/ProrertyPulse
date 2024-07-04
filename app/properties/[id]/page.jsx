@@ -6,6 +6,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import { fetchProperty } from "@/utils/requests";
 import PropertyHeaderImage from "@/components/PropertyHeaderImage";
 import PropertyDetails from "@/components/PropertyDetails";
+import Spinner from "@/components/Spinner";
 
 const PropertyPage = () => {
   const [property, setProperty] = useState(null);
@@ -18,7 +19,6 @@ const PropertyPage = () => {
       if (!id) return;
       try {
         const property = await fetchProperty(id);
-        console.log("property");
         setProperty(property);
       } catch (error) {
         console.error("Error fetching property: ", error);
@@ -42,6 +42,7 @@ const PropertyPage = () => {
 
   return (
     <>
+      {loading && <Spinner loading={loading}/>}
       {!loading && property && (
         <>
           <PropertyHeaderImage image={property.images[0]} />
@@ -49,19 +50,19 @@ const PropertyPage = () => {
             <div className="container m-auto py-6 px-6">
               <Link
                 href="/properties"
-                className="text-blue-500 hover:text-blue-600 flex items-center"
+                className="text-green-500 hover:text-green-600 flex items-center"
               >
                 <FaArrowLeft className="mr-2" /> Back to Properties
               </Link>
             </div>
           </section>
 
-          <section className="bg-blue-50">
+          <section className="bg-green-50">
             <div className="container m-auto py-10 px-6">
               <div className="grid grid-cols-1 md:grid-cols-70/30 w-full gap-6">
                 <PropertyDetails property={property} />
                 <aside className="space-y-4">
-                  <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold w-full py-2 px-4 rounded-full flex items-center justify-center">
+                  <button className="bg-green-500 hover:bg-green-600 text-white font-bold w-full py-2 px-4 rounded-full flex items-center justify-center">
                     <i className="fas fa-bookmark mr-2"></i> Bookmark Property
                   </button>
                   <button className="bg-orange-500 hover:bg-orange-600 text-white font-bold w-full py-2 px-4 rounded-full flex items-center justify-center">
