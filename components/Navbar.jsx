@@ -11,7 +11,6 @@ import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 const Navbar = () => {
   const { data: session } = useSession();
   const profileImage = session?.user?.image
-  console.log(profileImage)
 
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
@@ -187,24 +186,30 @@ const Navbar = () => {
                     tabIndex="-1"
                   >
                     <Link
-                      href="/"
+                      href="/profile"
                       className="block px-4 py-2 text-sm text-gray-700"
                       role="menuitem"
                       tabIndex="-1"
                       id="user-menu-item-0"
+                      onClick={() => setIsProfileDropdownOpen(false)}
                     >
                       Your Profile
                     </Link>
                     <Link
-                      href="/"
+                      href="/properties/saved"
                       className="block px-4 py-2 text-sm text-gray-700"
                       role="menuitem"
                       tabIndex="-1"
                       id="user-menu-item-2"
+                      onClick={() => setIsProfileDropdownOpen(false)}
                     >
                       Saved Properties
                     </Link>
                     <button
+                      onClick={() => {
+                        setIsProfileDropdownOpen(false)
+                        signOut()
+                      }}
                       className="block px-4 py-2 text-sm text-gray-700"
                       role="menuitem"
                       tabIndex="-1"
