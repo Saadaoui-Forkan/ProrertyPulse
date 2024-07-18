@@ -31,7 +31,6 @@ const BookmarkButton = ({ property }) => {
 
         if (res.status === 200) {
           const data = await res.json();
-          console.log(data)
           setIsBookmarked(data.isBookmarked);
         }
       } catch (error) {
@@ -70,7 +69,6 @@ const BookmarkButton = ({ property }) => {
       console.log(error);
       toast.error('Something went wrong');
     }
-    console.log(isBookmarked)
   };
 
   if (loading) return <p className='text-center'>Loading...</p>;
