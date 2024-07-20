@@ -1,32 +1,61 @@
 "use client";
 import { useState } from "react";
 import { FaPaperPlane } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const PropertyContactForm = ({ property }) => {
-  const [data, setData] = useState({
+  const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     message: "",
-    wasSubmitted: false,
     recipient: property.owner,
     property: property._id,
   });
+  const [wasSubmitted, setWasSubmitted] = useState(false)
 
-  const { name, email, phone, message } = data;
+  const { name, email, phone, message } = formData;
   const onChange = (e) => {
-    setData({ ...data, [e.target.id]: e.target.value });
+    setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setData({ ...data, wasSubmitted: true });
-  };
+    try {
+      const res = await fetch('/api/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
 
+      if (res.status === 200) {
+        toast.success('Message sent successfully')
+        setWasSubmitted(true)
+      } else if (res.status === 400 || res.status === 400) {
+        toast.error(data.message)
+      } else {
+        toast.error('Error sending form')
+      }
+    } catch (error) {
+      console.log(error)
+      toast.error('Error sending form')
+    } finally {
+      setFormData({ 
+        ...formData, 
+        name: "",
+        email: "",
+        phone: "",
+        message: "", 
+      })
+    }
+  };
+  console.log('Current formData:', formData);
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
       <h3 className="text-xl font-bold mb-6">Contact Property Manager</h3>
-      {data?.wasSubmitted ? (
+      {wasSubmitted ? (
         <p className="text-green-700 mb-4 font-bold">
           Your message has been sent successfully
         </p>
