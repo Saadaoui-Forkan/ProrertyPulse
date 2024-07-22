@@ -33,7 +33,7 @@ const PropertiesPage = async () => {
   }, [page, pageSize]);
 
   // Sort properties by date
-  properties.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  properties?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
   const handlePageChange = (newPage) => {
     setPage(newPage)
