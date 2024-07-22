@@ -6,7 +6,10 @@ async function fetchProperties({ showFeatured = false } = {}) {
     if (!apiDomain) {
       return [];
     }
-    const res = await fetch(`${apiDomain}/properties${showFeatured ? '/featured' : ''}`, { next: { revalidate: 10 } });
+    const res = await fetch(
+      `${apiDomain}/properties${showFeatured ? "/featured" : ""}`,
+      { next: { revalidate: 10 } }
+    );
     if (!res.ok) {
       throw new Error("Failed to fetch data");
     }
@@ -20,9 +23,11 @@ async function fetchProperties({ showFeatured = false } = {}) {
 // fetch single property
 async function fetchProperty(id) {
   try {
-    if (!apiDomain) return null
+    if (!apiDomain) return null;
 
-    const res = await fetch(`${apiDomain}/properties/${id}`);
+    const res = await fetch(`${apiDomain}/properties/${id}`, {
+      next: { revalidate: 10 },
+    });
     if (!res.ok) {
       throw new Error("Failed to fetch data");
     }
