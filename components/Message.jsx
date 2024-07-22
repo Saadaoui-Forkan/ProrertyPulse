@@ -11,7 +11,7 @@ const Message = ({ message }) => {
 
   const handleReadClick = async () => {
     try {
-      const res = await fetch(`/api/messages/${message._id}`, {
+      const res = await fetch(`/api/messages/${message?._id}`, {
         method: "PUT",
       });
 
@@ -33,14 +33,14 @@ const Message = ({ message }) => {
 
   const handleDeleteClick = async () => {
     try {
-      const res = await fetch(`/api/messages/${message._id}`, {
+      const res = await fetch(`/api/messages/${message?._id}`, {
         method: "DELETE",
       });
       if (res.status === 200) {
         setIsDeleted(true)
         setUnreadCount(prev => prev - 1)
         const data = await res.json();
-        toast.success(data.message);
+        toast.success(data?.message);
       }
     } catch (error) {
       console.log(error);
@@ -62,28 +62,28 @@ const Message = ({ message }) => {
         <span className="font-bold">Property Inquiry:</span>{" "}
         {message.property.name}
       </h2>
-      <p className="text-gray-700">{message.body}</p>
+      <p className="text-gray-700">{message?.body}</p>
 
       <ul className="mt-4">
         <li>
-          <strong>Name:</strong> {message.sender.username}
+          <strong>Name:</strong> {message?.sender?.username}
         </li>
 
         <li>
           <strong>Reply Email:</strong>{" "}
-          <a href={`mailto:${message.email}`} className="text-green-500">
-            {message.email}
+          <a href={`mailto:${message?.email}`} className="text-green-500">
+            {message?.email}
           </a>
         </li>
         <li>
           <strong>Reply Phone:</strong>{" "}
-          <a href={`tel:${message.phone}`} className="text-green-500">
-            {message.phone}
+          <a href={`tel:${message?.phone}`} className="text-green-500">
+            {message?.phone}
           </a>
         </li>
         <li>
           <strong>Received:</strong>{" "}
-          {new Date(message.createdAt).toLocaleString()}
+          {new Date(message?.createdAt).toLocaleString()}
         </li>
       </ul>
       <button
