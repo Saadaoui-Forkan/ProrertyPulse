@@ -9,7 +9,7 @@ export const GET = async (request) => {
   try {
     await connectDB();
 
-    const { searchParams } = new URL(request.url);
+    const { searchParams } = request.nextUrl;
     const location = searchParams.get("location");
     const propertyType = searchParams.get("propertyType");
 
