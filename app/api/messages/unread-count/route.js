@@ -2,10 +2,13 @@ import connectDB from "@/config/database";
 import Message from "@/models/Message";
 import { getSessionUser } from "@/utils/getSessionUser";
 
+export const dynamic = 'force-dynamic'; //TODO Put it to prevent static rendering for this rouyte
+
 /**
  * method: GET
  * route : /api/messages/unread-count
  */
+
 export const GET = async (request) => {
   try {
     await connectDB();
