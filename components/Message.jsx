@@ -60,7 +60,7 @@ const Message = ({ message }) => {
       )}
       <h2 className="text-xl mb-4">
         <span className="font-bold">Property Inquiry:</span>{" "}
-        {message.property.name}
+        {message?.property?.name}
       </h2>
       <p className="text-gray-700">{message?.body}</p>
 
