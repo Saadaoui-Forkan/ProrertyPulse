@@ -16,7 +16,7 @@
     "leaflet-defaulticon-compatibility": "^0.1.2",
     "mongodb": "^6.8.0",
     "mongoose": "^8.4.4",
-    "next": "14.2.4",
+    "next": "14.2.12",
     "next-auth": "^4.24.7",
     "opencage-api-client": "^1.0.7",
     "react": "^18",
